@@ -14,7 +14,6 @@ document.addEventListener("DOMContentLoaded", function () {
         document.querySelectorAll(".nav-link").forEach((link) => {
           const linkPath = link.getAttribute("href");
           if (!linkPath) return;
-
           const normalizedLinkPath = linkPath.replace("../", "").replace("./", "");
           if (currentPath.includes(normalizedLinkPath)) {
             link.classList.add("active");
@@ -31,6 +30,7 @@ document.addEventListener("DOMContentLoaded", function () {
       .catch((err) => console.error(err));
   }
 });
+
 
 document.addEventListener("DOMContentLoaded", () => {
   const projectCards = document.querySelectorAll(".project_card");
