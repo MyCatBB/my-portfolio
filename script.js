@@ -2,8 +2,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const navPlaceholder = document.getElementById("nav-placeholder");
   const footerPlaceholder = document.getElementById("footer-placeholder");
 
-  const basePath = location.pathname.includes("/components/") ? "../components/" : "components/";
-
+  const basePath = "";
   if (navPlaceholder) {
     fetch(basePath + "nav.html")
       .then((r) => r.text())
@@ -14,7 +13,8 @@ document.addEventListener("DOMContentLoaded", function () {
         document.querySelectorAll(".nav-link").forEach((link) => {
           const linkPath = link.getAttribute("href");
           if (!linkPath) return;
-          const normalizedLinkPath = linkPath.replace("../", "").replace("./", "");
+
+          const normalizedLinkPath = linkPath.replace("./", "").replace("/", "");
           if (currentPath.includes(normalizedLinkPath)) {
             link.classList.add("active");
           }
