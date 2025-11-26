@@ -2,14 +2,25 @@ document.addEventListener("DOMContentLoaded", function () {
   const navPlaceholder = document.getElementById("nav-placeholder");
   const footerPlaceholder = document.getElementById("footer-placeholder");
 
-  const basePath = location.pathname.includes("/components/")
-    ? "../components/"
-    : "components/";
+  const basePath = location.pathname.includes("/components/") ? "../components/" : "components/";
 
   if (navPlaceholder) {
     fetch(basePath + "nav.html")
       .then((r) => r.text())
-      .then((data) => (navPlaceholder.innerHTML = data))
+      .then((data) => {
+        navPlaceholder.innerHTML = data;
+
+        const currentPath = location.pathname;
+        document.querySelectorAll(".nav-link").forEach((link) => {
+          const linkPath = link.getAttribute("href");
+          if (!linkPath) return;
+
+          const normalizedLinkPath = linkPath.replace("../", "").replace("./", "");
+          if (currentPath.includes(normalizedLinkPath)) {
+            link.classList.add("active");
+          }
+        });
+      })
       .catch((err) => console.error(err));
   }
 
